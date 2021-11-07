@@ -190,4 +190,31 @@ public class FornecedorDAO {
                 return null;
         }
     }
+   public Fornecedor fornecedorIdSearch(int id){
+        try {
+            
+            String sql ="select * from fornecedor where id = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1,id);
+            ResultSet rs = stmt.executeQuery();
+            Fornecedor  obj = new Fornecedor();
+            
+            while(rs.next()){
+                    obj.setId(rs.getInt("id"));
+                    obj.setNome(rs.getString("nome"));
+                    obj.setCnpj(rs.getString("cnpj"));
+                    obj.setFone(rs.getString("fone"));
+                    obj.setEmail(rs.getString("email"));
+                    obj.setIe(rs.getString("ie"));
+                    obj.setCep(rs.getString("cep"));
+                    obj.setCidade(rs.getString("cidade"));
+                    obj.setUf(rs.getString("uf"));
+                    obj.setEndereco(rs.getString("endereco"));
+            }
+            return obj;
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro ao Buscar Cliente:"+" "+e);
+                return null;
+        }
+    }
 }

@@ -5,6 +5,8 @@
  */
 package erp.objects;
 
+import erp.dao.NivelAcessoDAO;
+
 /**
  *
  * @author home
@@ -25,6 +27,26 @@ public class Funcionario {
     private String uf;
     private String numero;
     private String bairro;
+    
+    public NivelAcessoDAO ndao = new NivelAcessoDAO();
+    
+    public Funcionario(){
+        
+    }
+    public Funcionario(int id, String login, String senha, NivelAcesso nivelAcesso, String nome, String rg, String cpf, String endereco, String cep, String cidade, String uf, String numero, String bairro){
+        super();
+        this.id = id;
+        this.login = login;
+        this.senha = senha;
+        this.nivelAcesso = nivelAcesso;
+        this.nome = nome;
+        this.rg = rg;
+        this.cpf= cpf;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.numero = numero;
+        this.bairro = bairro;
+    }
 
     public String getNivelAcessoo() {
         return nivelAcessoo;
@@ -33,7 +55,6 @@ public class Funcionario {
     public void setNivelAcessoo(String nivelAcessoo) {
         this.nivelAcessoo = nivelAcessoo;
     }
-    
 
     public int getId() {
         return id;
@@ -63,18 +84,11 @@ public class Funcionario {
         return nivelAcesso;
     }
 
-    public void setNivelAcesso(NivelAcesso nivelAcesso) {
-        this.nivelAcesso = nivelAcesso;
+    public void setNivelAcesso(int id) {
+        NivelAcesso obj = ndao.nivelAcessoIdSearch(id);
+        this.nivelAcesso = obj;
     }
-    
-    
-    
-    //public String getNivelAcesso(){
-    //    return nivelAcesso;
-   // }
-   // public void setNivelAcesso(String nivelAcesso){
-   //     this.nivelAcesso=nivelAcesso;
-   // }
+
 
     public String getNome() {
         return nome;

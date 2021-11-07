@@ -1,6 +1,8 @@
 
 package erp.objects;
 
+import erp.dao.FornecedorDAO;
+
 /**
  * 
  * @author Jaime
@@ -12,10 +14,27 @@ public class Produtos {
     private String unidade;
     private int precoDeCompra;
     private double precoDeVenda;
-    private Fornecedor fornecedor;
+    private Fornecedor fornecedor; // não uso, tentar ajeitar o relacionamento
     private int fornecedorr;
     private double lucro;
     private String estoque;
+    
+    public FornecedorDAO fornecedordao = new FornecedorDAO();
+    
+    public Produtos(){
+        
+    }
+    public Produtos(int idProd, String Nome, String unidade, int precoDeCompra, double precoDeVenda, Fornecedor fornecedor, double lucro, String estoque){
+        super();
+        this.idProd = idProd;
+        this.nome = nome;
+        this.unidade = unidade;
+        this.precoDeCompra = precoDeCompra;
+        this.precoDeVenda = precoDeVenda;
+        this.fornecedor = fornecedor;
+        this.lucro = lucro;
+        this.estoque = estoque;
+    }
 
     public int getFornecedorr() {
         return fornecedorr;
@@ -25,8 +44,6 @@ public class Produtos {
         this.fornecedorr = fornecedorr;
     }
 
-    
-    
     
     public double getLucro() {
         return lucro;
@@ -90,18 +107,14 @@ public class Produtos {
         return fornecedor;
     }
 
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
+    public void setFornecedor(int id) {
+        Fornecedor obj = fornecedordao.fornecedorIdSearch(id);
+        this.fornecedor = obj;
     }
-
-
-    
-
 
     public String getEstoque() {
         return estoque;
     }
-
 
     public void setEstoque(String estoque) {
         this.estoque = estoque;

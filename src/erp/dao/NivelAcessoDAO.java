@@ -6,6 +6,7 @@
 package erp.dao;
 
 import erp.jdbc.ConnectionFactory;
+import erp.objects.NivelAcesso;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,6 +36,26 @@ public class NivelAcessoDAO {
             return null;
         }
 
+    }
+    
+    public NivelAcesso nivelAcessoIdSearch(int id){
+        try {
+            
+            String sql ="select * from niveldeacesso where id = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1,id);
+            ResultSet rs = stmt.executeQuery();
+            NivelAcesso  obj = new NivelAcesso();
+            
+            while(rs.next()){
+                    obj.setId(rs.getInt("id"));
+                    obj.setNome(rs.getString("nome"));
+            }
+            return obj;
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro ao Buscar nivel de acesso dao :"+e);
+                return null;
+        }
     }
     
 }

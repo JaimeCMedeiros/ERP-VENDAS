@@ -457,7 +457,7 @@ public class frmFuncionario extends javax.swing.JFrame {
 	obj.setLogin(tfLogin.getText());
 	obj.setSenha(tfSenha.getText());
         CodigoNivelAcesso = idNivelAcesso.get(cbNivelAcesso.getSelectedIndex());
-        obj.setNivelAcessoo(cbNivelAcesso.getSelectedItem().toString());
+        obj.setNivelAcesso(CodigoNivelAcesso);
         //obj.getNivelAcesso().setId(CodigoNivelAcesso); // dando problema no relacionamento (provavel solução seria o evento ancestor do combobox)
         //obj.getNivelAcessoo(cbNivelAcesso.getSelectedItem().toString());//combobox
         obj.setNome(tfNome.getText());
@@ -486,9 +486,9 @@ public class frmFuncionario extends javax.swing.JFrame {
 	obj.setLogin(tfLogin.getText());
 	obj.setSenha(tfSenha.getText());
 	CodigoNivelAcesso = idNivelAcesso.get(cbNivelAcesso.getSelectedIndex());
+        obj.setNivelAcesso(CodigoNivelAcesso);
         //obj.getNivelAcesso().setId(CodigoNivelAcesso);
-        //obj.setNivelAcesso(cbNivelAcesso.getSelectedItem().toString());
-        obj.setNivelAcessoo(cbNivelAcesso.getSelectedItem().toString());
+        //obj.setNivelAcessoo(cbNivelAcesso.getSelectedItem().toString());
         obj.setNome(tfNome.getText());
         obj.setRg(tfRg.getText());
         obj.setCpf(ftCpf.getText());

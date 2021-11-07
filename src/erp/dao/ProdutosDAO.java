@@ -16,6 +16,10 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import erp.view.frmProdutos;
 
+//problema de relacionamento resolvido.
+//>Resolver problema no relacionamento de listar<
+//>e provavel erro no metodo para popular a cbbox.<
+
 /**
  *
  * @author Jaime
@@ -32,14 +36,14 @@ public class ProdutosDAO {
     public void adicionarProdutos(Produtos obj){
         try {
             String sql = "insert into produtos (nome, unidade, precoDeCompra, precoDeVenda, fornecedor, estoque, lucro)"
-                    + "value(?,?,?,?,?,?)";
+                    + "value(?,?,?,?,?,?,?)";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, obj.getNome());     
             stm.setString(2, obj.getUnidade());
             stm.setInt(3, obj.getPrecoDeCompra());
             stm.setDouble(4, obj.getPrecoDeVenda());
-            //stm.setInt(5, obj.getFornecedor().getId());
-            stm.setInt(5, obj.getFornecedorr());
+            stm.setInt(5, obj.getFornecedor().getId()); 
+            //stm.setInt(5, obj.getFornecedorr()); 
             stm.setString(6, obj.getEstoque());
             stm.setDouble(7,obj.getLucro());
             
@@ -48,7 +52,7 @@ public class ProdutosDAO {
             
             JOptionPane.showMessageDialog(null, "Cadastro de produto feito com sucesso");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao efetuar cadastro de produto"+" "+e);
+            JOptionPane.showMessageDialog(null, "Erro ao efetuar cadastro de produto dao "+e);
         }
     }
     
@@ -62,8 +66,8 @@ public class ProdutosDAO {
             stm.setString(2, obj.getUnidade());
             stm.setInt(3, obj.getPrecoDeCompra());
             stm.setDouble(4, obj.getPrecoDeVenda());
-            //stm.setInt(5, obj.getFornecedor().getId());
-            stm.setInt(5, obj.getFornecedorr());
+            stm.setInt(5, obj.getFornecedor().getId());
+            //stm.setInt(5, obj.getFornecedorr());
             stm.setString(6, obj.getEstoque());
             stm.setDouble(7, obj.getLucro());
             stm.setInt(8, obj.getIdProd());
@@ -130,8 +134,7 @@ public class ProdutosDAO {
             List<Produtos> lista = new ArrayList<>();
             
             String sql = "select * from produtos";
-            
-            
+
             PreparedStatement stm = con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             
@@ -154,7 +157,7 @@ public class ProdutosDAO {
            }
            return lista;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar Produtos: "+e);
+            JOptionPane.showMessageDialog(null, "Erro ao listar Produtos dao: "+e);
             return null;
         }
     }
@@ -176,8 +179,8 @@ public class ProdutosDAO {
                obj.setUnidade(rs.getString("unidade"));
                obj.setPrecoDeCompra(rs.getInt("precoDeCompra"));
                obj.setPrecoDeVenda(rs.getDouble("precoDeVenda"));
-               //obj.setFornecedorr(rs.getInt("fornecedor"));
-               obj.getFornecedor().setId(rs.getInt("fornecedor"));
+               obj.setFornecedorr(rs.getInt("fornecedor"));
+               //obj.getFornecedor().setId(rs.getInt("fornecedor"));
                obj.setEstoque(rs.getString("estoque"));
                obj.setLucro(rs.getDouble("lucro"));
                     
@@ -189,6 +192,8 @@ public class ProdutosDAO {
                 return null;
         }
     }
+    
+    
     public Produtos buscarPorCodigo(int idProd){
         try {
             
@@ -218,6 +223,43 @@ public class ProdutosDAO {
            return obj;
         } catch (Exception e) {
             return null;
+        }
+    }
+    
+        public Produtos retornaQtdPorCodigo(int idProd){
+        try {
+            String sql = "select estoque from produtos where idProd = ?";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1,idProd);
+            ResultSet rs = stm.executeQuery();
+            Produtos obj = new Produtos();
+            while(rs.next()){
+                //>quero saber se para pegar uma informação(estoque) preciso tbm pegar o id<
+                //>ou eu só preciso pegar oque eu quero<
+                //obj.setIdProd(rs.getInt("idProd"));
+                obj.setEstoque(rs.getString("estoque"));
+            }
+            return obj;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Erro ao retorna quantidade de estoque dao"+e);
+            return null;
+        }     
+    }
+    
+    public void updateEstoque(Produtos obj){
+        try{
+         String sql = "update produtos set estoque=? where idProd=?";
+            
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(6, obj.getEstoque());
+            stm.setInt(8, obj.getIdProd());
+            
+            stm.execute();
+            stm.close();
+            
+            JOptionPane.showMessageDialog(null, "Produto alterado com sucesso");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar produto: "+e);
         }
     }
 }

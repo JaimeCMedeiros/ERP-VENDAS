@@ -17,6 +17,24 @@ public class Clientes {
     private String uf;
     private String numero;
     private String bairro;
+    
+    public Clientes(){
+        
+    }
+    
+    public Clientes(int id, String nome, String rg, String cpf, String endereco, String cep, String cidade, String uf, String numero, String bairro){
+        super();
+        this.id = id;
+        this.nome = nome;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.cep = cep;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.numero = numero;
+        this.bairro = bairro;
+    }
 
     public int getId() {
         return id;

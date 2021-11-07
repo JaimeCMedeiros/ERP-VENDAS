@@ -33,8 +33,8 @@ public class FuncionarioDAO {
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, obj.getLogin());
             stm.setString(2, obj.getSenha());
-            //stm.setInt(3, obj.getNivelAcesso().getId());
-            stm.setString(3, obj.getNivelAcessoo());
+            stm.setInt(3, obj.getNivelAcesso().getId());
+            //stm.setString(3, obj.getNivelAcessoo());
             stm.setString(4, obj.getNome());
             stm.setString(5, obj.getRg());
             stm.setString(6, obj.getCpf());
@@ -63,8 +63,8 @@ public class FuncionarioDAO {
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, obj.getLogin());
             stm.setString(2, obj.getSenha());
-            //stm.setInt(3, obj.getNivelAcesso().getId());
-            stm.setString(3,obj.getNivelAcessoo());
+            stm.setInt(3, obj.getNivelAcesso().getId());
+            //stm.setString(3,obj.getNivelAcessoo());
             stm.setString(4, obj.getNome());
             stm.setString(5, obj.getRg());
             stm.setString(6, obj.getCpf());

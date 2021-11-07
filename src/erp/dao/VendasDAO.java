@@ -6,6 +6,7 @@
 package erp.dao;
 import java.sql.Connection;
 import erp.jdbc.ConnectionFactory;
+import erp.objects.Produtos;
 import erp.objects.Vendas;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
