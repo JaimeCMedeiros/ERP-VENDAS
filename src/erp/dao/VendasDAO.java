@@ -26,7 +26,7 @@ public class VendasDAO {
     
     public void cadastrarVenda(Vendas obj){
         try {
-            String sql = "insert into vendas (cliente_id, data_venda, total_venda, observacoes) "
+            String sql = "insert into vendas (cliente_id, data_venda, total_vendas, observacoes) "
                     + "value (?,?,?,?)";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, obj.getCliente().getId());
@@ -40,7 +40,7 @@ public class VendasDAO {
             JOptionPane.showMessageDialog(null, "Cadastrado realizado com sucesso");
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error ao cadastrar:" + " " +e);
+            JOptionPane.showMessageDialog(null, "Error ao cadastrar dao:" + " " +e);
         }
     }
 }

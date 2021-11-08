@@ -8,6 +8,7 @@ package erp.view;
 import erp.dao.FuncionarioDAO;
 import erp.dao.NivelAcessoDAO;
 import erp.objects.Funcionario;
+import erp.objects.NivelAcesso;
 import erp.services.FuncionarioService;
 import java.sql.ResultSet;
 import java.util.List;
@@ -51,6 +52,7 @@ public class frmFuncionario extends javax.swing.JFrame {
         }
     }
     
+    
     public void listar(){
         FuncionarioDAO dao = new FuncionarioDAO();
         List<Funcionario> lista = dao.listarFuncionario();
@@ -62,7 +64,8 @@ public class frmFuncionario extends javax.swing.JFrame {
             c.getId(),
             c.getLogin(),
             c.getSenha(),
-            c.getNivelAcessoo(),//c.getNivelAcesso.getId(),
+            //c.getNivelAcessoo(),
+            c.getNivelAcesso().getNome(),
             c.getNome(),
             c.getRg(),
             c.getCpf(),
@@ -80,7 +83,8 @@ public class frmFuncionario extends javax.swing.JFrame {
    
     public frmFuncionario() {
         initComponents();
-        PreencherComboBoxNivelAcesso();
+        
+        //PreencherComboBoxNivelAcesso();
     }
 
 
@@ -115,7 +119,7 @@ public class frmFuncionario extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         tfSenha = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        cbNivelAcesso = new javax.swing.JComboBox<>();
+        cbNivelAcesso = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         tfPesquisar = new javax.swing.JTextField();
@@ -177,6 +181,26 @@ public class frmFuncionario extends javax.swing.JFrame {
         jLabel16.setText("Senha");
 
         jLabel17.setText("Perfil de Acesso");
+
+        cbNivelAcesso.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                cbNivelAcessoAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        cbNivelAcesso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbNivelAcessoMouseClicked(evt);
+            }
+        });
+        cbNivelAcesso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbNivelAcessoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -456,10 +480,13 @@ public class frmFuncionario extends javax.swing.JFrame {
         
 	obj.setLogin(tfLogin.getText());
 	obj.setSenha(tfSenha.getText());
-        CodigoNivelAcesso = idNivelAcesso.get(cbNivelAcesso.getSelectedIndex());
-        obj.setNivelAcesso(CodigoNivelAcesso);
+        
+        
+        //CodigoNivelAcesso = idNivelAcesso.get(cbNivelAcesso.getSelectedIndex());
+        //obj.setNivelAcesso(CodigoNivelAcesso);
         //obj.getNivelAcesso().setId(CodigoNivelAcesso); // dando problema no relacionamento (provavel solução seria o evento ancestor do combobox)
-        //obj.getNivelAcessoo(cbNivelAcesso.getSelectedItem().toString());//combobox
+        obj.getNivelAcesso(cbNivelAcesso.getSelectedIndex());//combobox
+        
         obj.setNome(tfNome.getText());
         obj.setRg(tfRg.getText());
         obj.setCpf(ftCpf.getText());
@@ -485,8 +512,8 @@ public class frmFuncionario extends javax.swing.JFrame {
         
 	obj.setLogin(tfLogin.getText());
 	obj.setSenha(tfSenha.getText());
-	CodigoNivelAcesso = idNivelAcesso.get(cbNivelAcesso.getSelectedIndex());
-        obj.setNivelAcesso(CodigoNivelAcesso);
+	//CodigoNivelAcesso = idNivelAcesso.get(cbNivelAcesso.getSelectedIndex());
+        //obj.setNivelAcesso(CodigoNivelAcesso);
         //obj.getNivelAcesso().setId(CodigoNivelAcesso);
         //obj.setNivelAcessoo(cbNivelAcesso.getSelectedItem().toString());
         obj.setNome(tfNome.getText());
@@ -512,18 +539,18 @@ public class frmFuncionario extends javax.swing.JFrame {
 
     private void btExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btExcluirMouseClicked
         
-        //try {
+        try {
         Funcionario obj = new Funcionario();
         obj.setId(Integer.parseInt(tfCodigo.getText()));
         
-        FuncionarioDAO fuDAO = new FuncionarioDAO();
-        fuDAO.deleteFuncionario(obj);
+        //FuncionarioDAO fuDAO = new FuncionarioDAO();
+        //fuDAO.deleteFuncionario(obj);
         
-        //FuncionarioService fuServ = new FuncionarioService();
-       // fuServ.deleteFuncionario(obj);
-       // } catch (Exception e) {
-       ///     JOptionPane.showMessageDialog(null, "Erro no Excluir frm"+e);
-       // }
+        FuncionarioService fuServ = new FuncionarioService();
+        fuServ.deleteFuncionario(obj);
+        } catch (Exception e) {
+           JOptionPane.showMessageDialog(null, "Erro no Excluir frm"+e);
+        }
        
     }//GEN-LAST:event_btExcluirMouseClicked
 
@@ -590,6 +617,31 @@ public class frmFuncionario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btTelaPMouseClicked
 
+    private void cbNivelAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNivelAcessoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbNivelAcessoActionPerformed
+
+    private void cbNivelAcessoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbNivelAcessoAncestorAdded
+        // TODO add your handling code here:
+        //NivelAcessoDAO  ndao = new NivelAcessoDAO();
+       // List<NivelAcesso> listFu = ndao.listarNivAcesso();
+        //cbNivelAcesso.removeAll();
+       // for(NivelAcesso f : listFu){ 
+        //    cbNivelAcesso.addItem(f);
+       // }
+        
+    }//GEN-LAST:event_cbNivelAcessoAncestorAdded
+
+    private void cbNivelAcessoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbNivelAcessoMouseClicked
+        // TODO add your handling code here:
+        NivelAcessoDAO  ndao = new NivelAcessoDAO();
+        List<NivelAcesso> listFu = ndao.listarNivAcesso();
+        cbNivelAcesso.removeAll();
+        for(NivelAcesso f : listFu){ 
+            cbNivelAcesso.addItem(f);
+        }
+    }//GEN-LAST:event_cbNivelAcessoMouseClicked
+
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -629,7 +681,7 @@ public class frmFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton btNovo;
     private javax.swing.JButton btSalvar;
     private javax.swing.JButton btTelaP;
-    private javax.swing.JComboBox<String> cbNivelAcesso;
+    private javax.swing.JComboBox cbNivelAcesso;
     private javax.swing.JComboBox<String> cbUf;
     private javax.swing.JFormattedTextField ftCep;
     private javax.swing.JFormattedTextField ftCpf;

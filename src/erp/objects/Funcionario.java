@@ -13,11 +13,14 @@ import erp.dao.NivelAcessoDAO;
  */
 public class Funcionario {
     
+    
+    private NivelAcesso nivelAcesso;
+    
+    private String nivelAcessoo;
+    
     private int id;
     private String login;
     private String senha;
-    private NivelAcesso nivelAcesso;
-    private String nivelAcessoo;
     private String nome;
     private String rg;
     private String cpf;
@@ -84,9 +87,9 @@ public class Funcionario {
         return nivelAcesso;
     }
 
-    public void setNivelAcesso(int id) {
-        NivelAcesso obj = ndao.nivelAcessoIdSearch(id);
-        this.nivelAcesso = obj;
+    public void setNivelAcesso(NivelAcesso nivelAcesso) {
+        //NivelAcesso obj = ndao.nivelAcessoIdSearch(id);
+        this.nivelAcesso = nivelAcesso;
     }
 
 

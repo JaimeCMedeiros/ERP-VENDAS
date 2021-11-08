@@ -10,6 +10,8 @@ import erp.objects.NivelAcesso;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -58,4 +60,25 @@ public class NivelAcessoDAO {
         }
     }
     
+    public List<NivelAcesso> listarNivAcesso(){
+        try {
+                List<NivelAcesso> lista = new ArrayList<>();
+                
+                String sql = "select * from niveldeacesso";
+                
+                PreparedStatement stm = con.prepareStatement(sql);
+                ResultSet rs = stm.executeQuery();
+                
+                while (rs.next()){
+                    NivelAcesso obj = new NivelAcesso();
+                    obj.setId(rs.getInt("id"));
+                    obj.setNome(rs.getString("nome"));
+                    lista.add(obj);
+                }
+                return lista;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro ao Listar no DAO nivel: "+e);
+                return null;
+            }
+    }
 }
