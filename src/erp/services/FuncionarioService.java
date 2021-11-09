@@ -27,7 +27,7 @@ public class FuncionarioService implements IFuncionarioService {
                     ||"".equals(obj.getUf()) ||"".equals(obj.getNumero()) ||"".equals(obj.getBairro()) ){
                 throw new ExceptionFuncionario("Não pode adicionar faltando informações");
             }
-            fuDAO.adicionarFuncionario(obj);
+            fuDAO.addFuncionario(obj);
         } catch (Exception e) {
         }
     }

@@ -87,11 +87,10 @@ public class Funcionario {
         return nivelAcesso;
     }
 
-    public void setNivelAcesso(NivelAcesso nivelAcesso) {
-        //NivelAcesso obj = ndao.nivelAcessoIdSearch(id);
-        this.nivelAcesso = nivelAcesso;
+    public void setNivelAcesso(int id) {
+        NivelAcesso obj = ndao.nivelAcessoIdSearch(id);
+        this.nivelAcesso = obj;
     }
-
 
     public String getNome() {
         return nome;

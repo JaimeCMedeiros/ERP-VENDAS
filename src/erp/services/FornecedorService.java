@@ -30,7 +30,7 @@ public class FornecedorService implements IFornecedorService {
                     "".equals(obj.getEndereco())) {
                 throw new ExceptionFornecedor("Não pode salvar faltando informações");
             }
-            fDAO.adicionarFornecedor(obj);
+            fDAO.addFornecedor(obj);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
         }
