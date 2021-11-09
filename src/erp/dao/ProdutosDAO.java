@@ -33,7 +33,7 @@ public class ProdutosDAO {
     }
     
 
-    public void adicionarProdutos(Produtos obj){
+    public void addProdutos(Produtos obj){
         try {
             String sql = "insert into produtos (nome, unidade, precoDeCompra, precoDeVenda, fornecedor, estoque, lucro)"
                     + "value(?,?,?,?,?,?,?)";
@@ -43,8 +43,7 @@ public class ProdutosDAO {
             stm.setInt(3, obj.getPrecoDeCompra());
             stm.setDouble(4, obj.getPrecoDeVenda());
             stm.setInt(5, obj.getFornecedor().getId()); 
-            //stm.setInt(5, obj.getFornecedorr()); 
-            stm.setString(6, obj.getEstoque());
+            stm.setInt(6, obj.getEstoque());
             stm.setDouble(7,obj.getLucro());
             
             stm.execute();
@@ -67,8 +66,7 @@ public class ProdutosDAO {
             stm.setInt(3, obj.getPrecoDeCompra());
             stm.setDouble(4, obj.getPrecoDeVenda());
             stm.setInt(5, obj.getFornecedor().getId());
-            //stm.setInt(5, obj.getFornecedorr());
-            stm.setString(6, obj.getEstoque());
+            stm.setInt(6, obj.getEstoque());
             stm.setDouble(7, obj.getLucro());
             stm.setInt(8, obj.getIdProd());
             
@@ -116,8 +114,7 @@ public class ProdutosDAO {
                obj.setPrecoDeCompra(rs.getInt("precoDeCompra"));
                obj.setPrecoDeVenda(rs.getDouble("precoDeVenda"));
                obj.setFornecedorr(rs.getInt("fornecedor"));
-               //obj.getFornecedor().setId(rs.getInt("fornecedor")); // erro em get
-               obj.setEstoque(rs.getString("estoque"));
+               obj.setEstoque(rs.getInt("estoque"));
                obj.setLucro(rs.getDouble("lucro"));
                
                
@@ -147,8 +144,7 @@ public class ProdutosDAO {
                obj.setPrecoDeCompra(rs.getInt("precoDeCompra"));
                obj.setPrecoDeVenda(rs.getDouble("precoDeVenda"));
                obj.setFornecedorr(rs.getInt("fornecedor"));
-               //obj.getFornecedor().setId(rs.getInt("fornecedor"));
-               obj.setEstoque(rs.getString("estoque"));
+               obj.setEstoque(rs.getInt("estoque"));
                obj.setLucro(rs.getDouble("lucro"));
                
                
@@ -180,8 +176,7 @@ public class ProdutosDAO {
                obj.setPrecoDeCompra(rs.getInt("precoDeCompra"));
                obj.setPrecoDeVenda(rs.getDouble("precoDeVenda"));
                obj.setFornecedorr(rs.getInt("fornecedor"));
-               //obj.getFornecedor().setId(rs.getInt("fornecedor"));
-               obj.setEstoque(rs.getString("estoque"));
+               obj.setEstoque(rs.getInt("estoque"));
                obj.setLucro(rs.getDouble("lucro"));
                     
                     lista.add(obj);           
@@ -213,8 +208,7 @@ public class ProdutosDAO {
                obj.setPrecoDeCompra(rs.getInt("precoDeCompra"));
                obj.setPrecoDeVenda(rs.getDouble("precoDeVenda"));
                obj.setFornecedorr(rs.getInt("fornecedor"));
-               //obj.getFornecedor().setId(rs.getInt("fornecedor"));
-               obj.setEstoque(rs.getString("estoque"));
+               obj.setEstoque(rs.getInt("estoque"));
                obj.setLucro(rs.getDouble("lucro"));
                
               
@@ -234,10 +228,7 @@ public class ProdutosDAO {
             ResultSet rs = stm.executeQuery();
             Produtos obj = new Produtos();
             while(rs.next()){
-                //>quero saber se para pegar uma informação(estoque) preciso tbm pegar o id<
-                //>ou eu só preciso pegar oque eu quero<
-                //obj.setIdProd(rs.getInt("idProd"));
-                obj.setEstoque(rs.getString("estoque"));
+                obj.setEstoque(rs.getInt("estoque"));
             }
             return obj;
         } catch (Exception e) {
@@ -251,7 +242,7 @@ public class ProdutosDAO {
          String sql = "update produtos set estoque=? where idProd=?";
             
             PreparedStatement stm = con.prepareStatement(sql);
-            stm.setString(6, obj.getEstoque());
+            stm.setInt(6, obj.getEstoque());
             stm.setInt(8, obj.getIdProd());
             
             stm.execute();
@@ -262,4 +253,37 @@ public class ProdutosDAO {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar produto: "+e);
         }
     }
+    
+    public void baixaDeEstoque(int idProd, int qtd_nova){
+        try {
+            String sql = "update produtos set estoque=? where idProd=";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            
+            stmt.setInt(1, qtd_nova);
+            stmt.setInt(2, idProd);
+            stmt.execute();
+            stmt.close();
+                    
+        } catch (Exception e) {
+        }
+    }
+    
+    public int retornaEstoqueAtual(int id){
+        try {
+            int qtd_estoque = 0;
+            String sql = "SELECT estoque from produtos where idProd = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1,id);
+            ResultSet rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                qtd_estoque = (rs.getInt("estoque"));
+            }
+            return qtd_estoque;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+            
 }

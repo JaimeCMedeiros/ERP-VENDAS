@@ -377,10 +377,10 @@ public class frmVendas extends javax.swing.JFrame {
        
        subtotal = qtd * preco;
        
-       total+= subtotal;//duvida aq, oq significa += subtotal no total e se seria igual a total = total + subtotal;
+       total+= subtotal;                       //duvida aq, oq significa += subtotal no total e se seria igual a total = total + subtotal;
        tfTTotal.setText(String.valueOf(total));
        
-       //inserir no carrinho
+                                                
        carrinho = (DefaultTableModel) tabelaItens.getModel();
        carrinho.addRow(new Object[]{
            tfCodigo.getText(),

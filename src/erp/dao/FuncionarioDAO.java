@@ -26,7 +26,7 @@ public class FuncionarioDAO {
         this.con = new ConnectionFactory().getConnection();
     }
     
-    public void adicionarFuncionario(Funcionario obj){
+    public void addFuncionario(Funcionario obj){
         try {
             String sql = "insert into funcionario (login, senha, nivelacesso, nome, rg, cpf, endereco, cep, cidade, uf, numero, bairro) "
                     + "value (?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -34,7 +34,6 @@ public class FuncionarioDAO {
             stm.setString(1, obj.getLogin());
             stm.setString(2, obj.getSenha());
             stm.setInt(3, obj.getNivelAcesso().getId());
-            //stm.setString(3, obj.getNivelAcessoo());
             stm.setString(4, obj.getNome());
             stm.setString(5, obj.getRg());
             stm.setString(6, obj.getCpf());
@@ -64,7 +63,6 @@ public class FuncionarioDAO {
             stm.setString(1, obj.getLogin());
             stm.setString(2, obj.getSenha());
             stm.setInt(3, obj.getNivelAcesso().getId());
-            //stm.setString(3,obj.getNivelAcessoo());
             stm.setString(4, obj.getNome());
             stm.setString(5, obj.getRg());
             stm.setString(6, obj.getCpf());
@@ -118,7 +116,6 @@ public class FuncionarioDAO {
                     obj.setId(rs.getInt("id"));
                     obj.setLogin(rs.getString("login"));
                     obj.setSenha(rs.getString("senha"));
-                    //obj.getNivelAcesso().setId(rs.getInt("nivelacesso"));
                     obj.setNivelAcessoo(rs.getString("nivelacesso"));
                     obj.setNome(rs.getString("nome"));
                     obj.setRg(rs.getString("rg"));
@@ -153,7 +150,6 @@ public class FuncionarioDAO {
                     obj.setId(rs.getInt("id"));
                     obj.setLogin(rs.getString("login"));
                     obj.setSenha(rs.getString("senha"));
-                    //obj.getNivelAcesso().setId(rs.getInt("nivelacesso"));
                     obj.setNivelAcessoo(rs.getString("nivelacesso"));
                     obj.setNome(rs.getString("nome"));
                     obj.setRg(rs.getString("rg"));

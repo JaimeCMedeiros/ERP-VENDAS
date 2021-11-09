@@ -29,7 +29,7 @@ public class ClientesService implements IClienteService {
                     "".equals(obj.getBairro())) {
                 throw new ExceptionCliente("Não pode salvar faltando informações");
             }
-            cDAO.adicionarClientes(obj);
+            cDAO.addClientes(obj);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
         }

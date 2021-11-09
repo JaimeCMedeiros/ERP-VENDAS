@@ -21,7 +21,7 @@ public class FornecedorDAO {
         this.con = new ConnectionFactory().getConnection();
     }
     
-    public void adicionarFornecedor(Fornecedor obj){
+    public void addFornecedor(Fornecedor obj){
         try {
             String sql = "insert into fornecedor (nome, cnpj, fone, email, ie, cep, cidade, uf, endereco) "
                     + "value (?,?,?,?,?,?,?,?,?)";
@@ -93,7 +93,7 @@ public class FornecedorDAO {
         try {
             List<Fornecedor> listaIdProd = new ArrayList<>();
             
-            String sql = "select id,Nome from fornecedor";
+            String sql = "select id, nome from fornecedor";
             
             PreparedStatement stm = con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
@@ -190,6 +190,7 @@ public class FornecedorDAO {
                 return null;
         }
     }
+        
    public Fornecedor fornecedorIdSearch(int id){
         try {
             

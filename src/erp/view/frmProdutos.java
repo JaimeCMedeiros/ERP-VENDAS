@@ -47,7 +47,6 @@ public class frmProdutos extends javax.swing.JFrame {
             c.getUnidade(),
             c.getPrecoDeCompra(),
             c.getPrecoDeVenda(),
-            //c.getFornecedor().getId(), //c.getFornecedor().getId() //c.setFornecedor().getId() 
             c.getFornecedorr(),
             c.getEstoque(),
             c.getLucro()
@@ -75,7 +74,6 @@ public class frmProdutos extends javax.swing.JFrame {
     public frmProdutos() {
        initComponents();
        PreencherComboBoxForne();
-       //PreencherId();
     }
 
     
@@ -391,9 +389,7 @@ public class frmProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_btNovoMouseClicked
 
     private void btSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalvarMouseClicked
-        try {
-            
-       
+
         int CodigoFornecedor;
         Produtos obj = new Produtos();
         
@@ -403,21 +399,17 @@ public class frmProdutos extends javax.swing.JFrame {
         obj.setPrecoDeVenda(Double.parseDouble(tfPrecoDeVenda.getText()));
         CodigoFornecedor = idFornecedor.get(cbxForneListar.getSelectedIndex()); 
         obj.setFornecedor(CodigoFornecedor);
-        obj.setEstoque(tfEstoque.getText());
+        obj.setEstoque(Integer.parseInt(tfEstoque.getText()));
         obj.setLucro(Double.parseDouble(tfPercentualDeLucro.getText()));
         
-        ProdutoService ps = new ProdutoService();
-        ps.adicionarProdutos(obj);
+        ProdutosDAO dao= new ProdutosDAO();
+        dao.addProdutos(obj);
+        obj.getFornecedor().setId(CodigoFornecedor);
         
-        //ProdutosDAO dao= new ProdutosDAO();
-        //dao.adicionarProdutos(obj);
-        //obj.getFornecedor().setId(CodigoFornecedor);
-         } catch (Exception e) {
-        }
     }//GEN-LAST:event_btSalvarMouseClicked
 
     private void btEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btEditarMouseClicked
-        try {
+        
             
         int CodigoFornecedor;
         Produtos obj = new Produtos();
@@ -428,32 +420,22 @@ public class frmProdutos extends javax.swing.JFrame {
         obj.setPrecoDeVenda(Double.parseDouble(tfPrecoDeVenda.getText()));
         CodigoFornecedor = idFornecedor.get(cbxForneListar.getSelectedIndex());
         obj.setFornecedor(CodigoFornecedor);
-        obj.setEstoque(tfEstoque.getText());
+        obj.setEstoque(Integer.parseInt(tfEstoque.getText()));
         obj.setLucro(Double.parseDouble(tfPercentualDeLucro.getText()));
         obj.setIdProd(Integer.parseInt(tfCodigo.getText()));
         
-        ProdutoService ps = new ProdutoService();
-        ps.updateProdutos(obj);
+        obj.getFornecedor().setId(CodigoFornecedor);
+        ProdutosDAO dao= new ProdutosDAO();
+        dao.updateProdutos(obj);
         
-        //obj.getFornecedor().setId(CodigoFornecedor);
-        //ProdutosDAO dao= new ProdutosDAO();
-        //dao.updateProdutos(obj);
-                } catch (Exception e) {
-        }
     }//GEN-LAST:event_btEditarMouseClicked
 
     private void btExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btExcluirMouseClicked
-        try {
-            
+          
         Produtos obj = new Produtos();
         obj.setIdProd(Integer.parseInt(tfCodigo.getText()));
-        ProdutoService ps = new ProdutoService();
-        ps.deleteProdutos(obj);
-        
-        //ProdutosDAO dao = new ProdutosDAO();
-        //dao.deleteProdutos(obj);
-            } catch (Exception e) {
-        }
+        ProdutosDAO dao= new ProdutosDAO();
+        dao.deleteProdutos(obj);
         
     }//GEN-LAST:event_btExcluirMouseClicked
 

@@ -26,7 +26,7 @@ public class ProdutoService implements IProdutoService {
                     ||"".equals(obj.getLucro())){
                 throw new ExceptionProduto("Não pode adicionaro faltando informações");
             }
-            pDAO.adicionarProdutos(obj);
+            pDAO.addProdutos(obj);
         } catch (Exception e) {       
         }
     }

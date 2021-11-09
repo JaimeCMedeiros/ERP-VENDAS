@@ -21,7 +21,7 @@ public class ClientesDAO {
         this.con = new ConnectionFactory().getConnection();
     }
     
-    public void adicionarClientes(Clientes obj){
+    public void addClientes(Clientes obj){
         try {
             String sql = "insert into clientes (nome, rg, cpf, endereco, cep, cidade, uf, numero, bairro) "
                     + "value (?,?,?,?,?,?,?,?,?)";
@@ -121,6 +121,7 @@ public class ClientesDAO {
                 return null;
             }
 }
+    
     public List<Clientes> buscarClientesPorNome(String nome){
         try {
             List<Clientes> lista = new ArrayList();

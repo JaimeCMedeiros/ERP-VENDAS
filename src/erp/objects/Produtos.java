@@ -17,14 +17,14 @@ public class Produtos {
     private Fornecedor fornecedor; // não uso, tentar ajeitar o relacionamento
     private int fornecedorr;
     private double lucro;
-    private String estoque;
+    private int estoque;
     
     public FornecedorDAO fornecedordao = new FornecedorDAO();
     
     public Produtos(){
         
     }
-    public Produtos(int idProd, String Nome, String unidade, int precoDeCompra, double precoDeVenda, Fornecedor fornecedor, double lucro, String estoque){
+    public Produtos(int idProd, String Nome, String unidade, int precoDeCompra, double precoDeVenda, Fornecedor fornecedor, double lucro, int estoque){
         super();
         this.idProd = idProd;
         this.nome = nome;
@@ -112,11 +112,11 @@ public class Produtos {
         this.fornecedor = obj;
     }
 
-    public String getEstoque() {
+    public int getEstoque() {
         return estoque;
     }
 
-    public void setEstoque(String estoque) {
+    public void setEstoque(int estoque) {
         this.estoque = estoque;
     }
     

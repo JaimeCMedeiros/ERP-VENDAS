@@ -25,7 +25,7 @@ public class ItemVendaDAO {
     }
     
     
-    public void cadastrarItemVenda(ItemVenda obj){
+    public void addItemVenda(ItemVenda obj){
         try {
             String sql = "insert into itensvendas (venda_id, produto_id, qtd, sub_total) "
                     + "value (?,?,?,?)";
